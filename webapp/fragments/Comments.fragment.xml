@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+	<Dialog id="CommentsDialog" title="Remarks"  resizable="true" draggable="true"
+		xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<HBox>
+		<Label visible="{ReasonVisModel>/RetReason}" text="Return Reason" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+			<ComboBox id="RetRsn" visible="{ReasonVisModel>/RetReason}"   class="sapUiTinyMarginBegin"
+				items="{
+					path: 'ResonsModel>/'
+				}">
+				<core:Item key="{ResonsModel>key}" text="{ResonsModel>Text}" />
+			</ComboBox>
+			<Label visible="{ReasonVisModel>/RejReason}" text="Reject Reason" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+			<ComboBox  id="RejRsn" visible="{ReasonVisModel>/RejReason}" class="sapUiTinyMarginBegin"
+				items="{
+					path: 'ResonsModel>/'
+				}">
+				<core:Item key="{ResonsModel>key}" text="{ResonsModel>Text}" />
+			</ComboBox>
+			</HBox>
+		<Label text="General Remarks" class="sapUiTinyMarginBegin"/>
+        <TextArea id="GenRem" class="sapUiTinyMargin"  value="{RemarksModel>/Remarks}" change="onChange" width="90%" rows="4" editable="{RemarksModel>/editable}"/>
+		<Label text="Internal Remarks" class="sapUiTinyMarginBegin"/>
+           <TextArea id="IntRem" class="sapUiTinyMargin"  value="{RemarksModel>/Remarks}" change="onChange" width="90%" rows="4" editable="{RemarksModel>/editable}"/>
+       
+	    <beginButton>
+		<Button text="ok"   press="onAction"/>
+		<!--visible="{= ${RemarksModel>/saveBtnVis} !== true }"-->
+		</beginButton>
+		<endButton>
+			<Button text="close"  press="onRemClose" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

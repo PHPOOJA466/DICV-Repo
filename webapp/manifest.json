@@ -1,0 +1,178 @@
+{
+  "_version": "1.37.0",
+  "sap.app": {
+    "id": "zclaimapproval",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.10.6",
+      "toolsId": "d64a7630-350a-439f-9721-0936ee7ee785"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZWTY_CLM_APR_INT_SRV",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "TaskProcessing":{
+        "uri": "/sap/opu/odata/IWPGW/TASKPROCESSING;mo;v=2",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.96.6",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zclaimapproval.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      },
+      "TaskProcessing":{
+        "dataSource": "TaskProcessing",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "zclaimapproval.view",
+        "controlAggregation": "",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Master",
+					"pattern": ":layout:",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetMaster",
+						"detail"
+					]
+				},{
+					"name": "detail",
+					"pattern": "detail/{layout}/{ID}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetMaster",
+						"detail"
+					]
+				},
+				{
+					"name": "wfobject",
+					"pattern": "detail/{scenarioid}/{wfInstanceId}/{taskPath}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"detail"
+					]
+				},
+				{
+					"name": "TargetApproval",
+					"pattern": "RouteApproval",
+					"target": [
+						"TargetApproval"
+					]
+				}
+			
+      ],
+      "targets": {
+       
+        "TargetMaster": {
+					"viewType": "XML",
+					"viewName": "Master",
+					"controlAggregation": "beginColumnPages",
+					"viewLevel": 1
+				},
+        "detail": {
+					"viewType": "XML",
+					"viewName": "Detail",
+					"controlAggregation": "midColumnPages",
+					"viewLevel": 1,
+          "viewId": "Detail"
+				},
+				"TargetApproval": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Approval",
+					"viewName": "Approval"
+				}
+      }
+    },
+    "rootView": {
+      "viewName": "zclaimapproval.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

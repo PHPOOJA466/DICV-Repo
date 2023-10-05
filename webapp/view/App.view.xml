@@ -1,0 +1,13 @@
+<mvc:View controllerName="zclaimapproval.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.f"
+   >
+   <!--- <App id="app">
+    </App>-->
+    	<FlexibleColumnLayout
+		id="app"
+		stateChange=".onStateChanged"
+		backgroundDesign="Solid"
+		layout="MidColumnFullScreen"/>
+       <!-- "{layoutModel>/layout}"/>-->
+</mvc:View>

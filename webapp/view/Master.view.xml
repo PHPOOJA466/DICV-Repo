@@ -1,0 +1,64 @@
+<mvc:View controllerName="zclaimapproval.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"  xmlns:f="sap.f"
+    xmlns="sap.m">
+    	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Claim Approval"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+	
+		<f:content>
+			<VBox fitContainer="true">
+				<OverflowToolbar class="sapFDynamicPageAlignContent">
+					<ToolbarSpacer/>
+					<SearchField search="onSearch" placeholder="Request Id" width="17.5rem"/>
+					<!--	<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>-->
+					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press="onSort"/>
+				</OverflowToolbar>
+				<List id="list" items="{ path: 'ExtraTime>/EEMPAPPREQSet', sorter: { path: 'ReqId', descending: false } }"
+					busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+					mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+					updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+					<infoToolbar>
+						<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press="onOpenViewSettings">
+							<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
+						</Toolbar>
+					</infoToolbar>
+					<items>
+						<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange"
+							title="{= parseInt(${ExtraTime>ReqId}) }">
+							<firstStatus>
+								<ObjectStatus text="{ExtraTime>Status}"/>
+							</firstStatus>
+							<ObjectAttribute text="{ExtraTime>EmpName}"/>
+							<ObjectAttribute text="{path:'ExtraTime>ReqType'}"/>
+						</ObjectListItem>
+					</items>
+				</List>
+				<!--	<List id="list" items="{ path: '/TaskCollection', sorter: { path: 'TaskTitle', descending: false } }"
+					busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+					mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+					updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+					<infoToolbar>
+						<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press="onOpenViewSettings">
+							<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
+						</Toolbar>
+					</infoToolbar>
+					<items>
+						<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange" title="{TaskTitle}"></ObjectListItem>
+					</items>
+				</List>-->
+			</VBox>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Accept"/>
+				<Button type="Reject" text="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

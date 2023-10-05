@@ -1,0 +1,39 @@
+/* Enter your custom styles here */
+.sapMShellContent {
+    box-sizing: border-box;
+    height: 100% !important;
+    width: 73%!important;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+.sapUxAPObjectPageLayoutNoAnchorBar .sapUxAPObjectPageSection:first-of-type>.sapUxAPObjectPageSectionHeader {
+    border-top: 0;
+    height: 0rem!important;
+    padding: 0rem;
+}
+
+.sapUxAPObjectPageSubSection {
+    padding-bottom: 0;
+    box-sizing: border-box;
+    padding: 0rem!important;
+    height: 0rem!important;
+}
+
+.sapUiSizeCompact .sapUxAPBlockContainer {
+    padding: 0rem!important;
+}
+
+.sapUxAPObjectPageHeaderContent {
+    padding: 0rem!important;
+}
+
+.sapUiSizeCompact .sapUxAPObjectPageLayout .sapUxAPObjectPageFooter {
+    height: 6rem!important;
+}
+.sapUiSizeCompact .sapMBar-CTX .sapMBtnInner.sapMBtnGhost:not(.sapMBtnDisabled) {
+    color: white;
+    background: orange;
+    border: 0.0625rem solid orange;
+}

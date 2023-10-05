@@ -1,0 +1,206 @@
+<mvc:View controllerName="zclaimapproval.controller.Detail" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:u="sap.ui.unified" displayBlock="true" xmlns="sap.m" 	xmlns:ux="sap.uxap">
+	<Shell>
+		<App>
+			<pages>
+				<Page id="page"  class="cls-page">
+		<OverflowToolbar >
+					<Label text="Claim"/>
+					<Input id="ClaimNo" editable="false" value="{ClaimModel>/Clmno}" width="8rem"/>
+					<Label text="Creation Date"/>
+					<DatePicker width="8rem" editable="false" dateValue="{ClaimModel>/Creadat}" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-dd"/>
+					<Label text="Submission Date"/>
+					<Input width="8rem" editable="false"  value="{path:'ClaimModel>/Claim_Subdate', formatter: '.formatter.getdateformat'}"  />
+					<Label text="Type"/>
+					<Input  editable="false" value="{ClaimModel>/Clmty_t}" width="8rem"/>
+					<Label text="Sub Type"/>
+					<Input  editable="false" value="{ClaimModel>/Clmgrp_t}" width="8rem"/>
+					<Label text="Status"/>
+					<Input  editable="false" value="{ClaimModel>/Astate_t}" width="8rem"/>
+					<Label text="Amount"/>
+					<Input  editable="false" value="{ClaimModel>/Ntamt}" width="8rem"/>
+					</OverflowToolbar>
+					
+	<ux:ObjectPageLayout showFooter="true"  id="ObjectPageLayout" enableLazyLoading="true"
+						upperCaseAnchorBar="false">
+							<ux:sections>
+							<ux:ObjectPageSection  titleUppercase="false" visible="true" title="">
+	<ux:subSections>
+									<ux:ObjectPageSubSection title="" titleUppercase="false">
+	<VBox >
+	<Panel headerText="Header Details" expandable="true" expanded="false">
+						<f:Form id="idCheckinDispForm" editable="false">
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+					emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true"/>
+			</f:layout>
+			<f:formContainers>
+						</f:formContainers>
+				</f:Form>
+					</Panel>
+					<IconTabBar
+		id="idIconTabBarMulti"
+		expanded="{device>/isNoPhone}"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter icon="sap-icon://hint" key="info">
+				<ScrollContainer  horizontal="true" vertical="true">
+					<!--<Table id="ClaimItemTable"
+		inset="false"
+		mode="MultiSelect"
+		items="{}">
+		
+		<columns>
+			<Column width="6rem">
+				<Text text="Claim Line Item Type" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Part/Labor No" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Description" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Aggregate" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Casual Item" />
+			</Column>
+			<Column width="5.4rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Amount Requested(With out Tax)" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Claim Value(With out Tax)" />
+			</Column>
+			<Column width="8rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Total Approved(With Tax)" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Claimed Quantity" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Damage Code" />
+			</Column>
+			<Column width="6.4rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Dispatchable" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Customer %" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="DICV %" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Dealer %" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Discount %" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Remarks" />
+			</Column>
+			<Column width="6rem" minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Status" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<ObjectIdentifier
+						title="{Name}"
+						text="{ProductId}"/>
+					<Text
+						text="{SupplierName}" />
+					<Text
+						text="{Width} x {Depth} x {Height} {DimUnit}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>-->
+	<Table id="ClaimItemTable"
+		inset="false"
+		mode="None"
+	/>
+	</ScrollContainer>
+			</IconTabFilter>
+			<IconTabFilter
+				icon="sap-icon://attachment"
+				key="attachments"
+				visible="true"
+				count="">
+					<u:FileUploader  fileType="jpg,bmp,png,jpeg,pdf" tooltip="Upload your file to the local server"
+					change="handleUploadComplete" buttonOnly="false" iconOnly="false" icon="sap-icon://attachment" enabled="true"/>
+										<List headerText="DICV Attachments"  items="{path: 'AttachmentSet>/'}" >
+		<CustomListItem>
+			<HBox>
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+					<Link text="{AttachmentSet>FileName}"  press="handlePress"/>
+				</VBox>
+			</HBox>
+		</CustomListItem>
+	</List>	
+
+	<List headerText="General Attachments"  items="{path: 'GenAttachmentSet>/'}" >
+		<CustomListItem>
+			<HBox>
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+					<Link text="{GenAttachmentSet>FileName}"  press="handlePress"/>
+				</VBox>
+			</HBox>
+		</CustomListItem>
+	</List>	
+			</IconTabFilter>
+			<IconTabFilter
+				icon="sap-icon://chain-link"
+				key="Link"
+				count="">
+				<Link text="{LinkModel>/Label}" press="onLinkPress"/>
+				
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+	</VBox>
+	<!--<Toolbar >
+		<ToolbarSpacer/>
+						<Button text="Approve" visible="{ActionModel>/NormalActionButton}" id="Approve" press="onApprove" type="Accept"/>
+								<Button text="Reject" visible="{ActionModel>/NormalActionButton}" id="Reject" press="onReject" type="Reject"/>
+							
+	</Toolbar>-->
+		</ux:ObjectPageSubSection>
+								</ux:subSections>
+							</ux:ObjectPageSection>
+						</ux:sections>
+						<ux:footer>
+						 <Bar>
+								<contentMiddle>
+								
+								<Button text="Approve" visible="{parts:['ClaimModel>/','i18n>Aprv'], formatter: '.formatter.getBtnVisibility'}" press="onApprove" type="Accept"/>
+								<Button text="Reject" visible="{parts:['ClaimModel>/','i18n>Rej'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"  press="onReject" type="Reject"/>
+					           <Button text="Forward" visible="{parts:['ClaimModel>/','i18n>Fwd'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"  press="onForward" type="Emphasized"/>
+								<Button text="Reassign" visible="{parts:['ClaimModel>/','i18n>Ran'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"    press="onReassign" type="Emphasized"/>
+							    <Button text="Return" visible="{parts:['ClaimModel>/','i18n>Ret'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"  press="onReturn" type="Emphasized"/>
+								<Button text="Close" visible="{parts:['ClaimModel>/','i18n>Cls'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"  press="onClose" type="Reject"/>
+								<Button text="Return to Dealer" visible="{parts:['ClaimModel>/','i18n>RetD'], formatter: '.formatter.getBtnVisibility'}" class="sapUiTinyMarginBegin"    press="onReturnD" type="Ghost"/>
+								<Button text="Lock" visible="{parts:['ClaimModel>/','i18n>Lock'], formatter: '.formatter.getBtnVisibilityLock'}" press="onApprove" type="Accept"/>
+								<Button text="UnLock" visible="{parts:['ClaimModel>/','i18n>Unlock'], formatter: '.formatter.getBtnVisibilityLock'}" class="sapUiTinyMarginBegin"  press="onReject" type="Reject"/>
+					           <Button text="UnLock and ByPass" visible="{parts:['ClaimModel>/','i18n>ByPass'], formatter: '.formatter.getBtnVisibilityLock'}" class="sapUiTinyMarginBegin"  press="onReject" type="Ghost"/>
+					           
+						</contentMiddle>
+						</Bar>	
+						</ux:footer>
+
+							</ux:ObjectPageLayout>
+					
+					<footer>
+						<Bar>
+							<contentMiddle>
+								<Button text="Approve" visible="{ActionModel>/NormalActionButton}" id="Approve" press="onApprove" type="Accept"/>
+								<Button text="Reject" visible="{ActionModel>/NormalActionButton}" id="Reject" press="onReject" type="Reject"/>
+							</contentMiddle>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
